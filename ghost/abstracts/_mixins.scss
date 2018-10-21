@@ -1,3 +1,39 @@
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
+
+@import "node_modules/bootstrap/scss/mixins";
+
+@mixin inner {
+  max-width: 50rem; // 55rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin col ($spans) {
+  @include make-col-ready;
+
+  @each $breakpoint, $column in $spans {
+    @include media-breakpoint-up ($breakpoint) {
+      @include make-col($column);
+    }
+  }
+}
+
+@mixin lead {
+  font-size: $lead-font-size;
+  font-weight: $lead-font-weight;
+}
+
+@mixin link-inherit ($color: inherit) {
+  a:not([class]) {
+    color: $color; // inherit; // currentColor;
+    // opacity: 1;
+
+    @include hover-focus {
+      border-bottom: $border-width solid currentColor;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+  }
+}
